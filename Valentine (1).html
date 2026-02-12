@@ -1,0 +1,400 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Will You Be My Valentine? 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffe5f1 0%, #ffc7e5 50%, #ff9ad3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        .bg-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+            will-change: transform;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: clamp(35px, 7vw, 60px) clamp(25px, 5vw, 70px);
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+            position: relative;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .heart-top {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(45px, 9vw, 65px);
+            animation: heartBeat 1.5s infinite;
+            filter: drop-shadow(0 4px 10px rgba(255, 105, 180, 0.4));
+        }
+
+        h1 {
+            font-size: clamp(30px, 6.5vw, 48px);
+            background: linear-gradient(135deg, #d81b60, #ff1744);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(12px, 2.5vw, 20px);
+            font-weight: 700;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .question {
+            font-size: clamp(18px, 4.5vw, 28px);
+            color: #ec407a;
+            margin-bottom: clamp(25px, 4.5vw, 40px);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            margin-top: clamp(25px, 4.5vw, 40px);
+            position: relative;
+            min-height: 130px;
+        }
+
+        @media (min-width: 500px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .btn-yes {
+            padding: clamp(14px, 2.8vw, 18px) clamp(35px, 7vw, 55px);
+            font-size: clamp(18px, 3.8vw, 24px);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff1744, #f50057);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            touch-action: manipulation;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 23, 68, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.98);
+        }
+
+        .btn-no {
+            padding: clamp(14px, 2.8vw, 18px) clamp(35px, 7vw, 55px);
+            font-size: clamp(18px, 3.8vw, 24px);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+            color: #666;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(189, 189, 189, 0.4);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 499px) {
+            .btn-no {
+                position: relative !important;
+                transform: none !important;
+            }
+        }
+
+        @media (min-width: 500px) {
+            .btn-no {
+                position: absolute;
+            }
+        }
+
+        .hint {
+            margin-top: clamp(20px, 3.5vw, 30px);
+            font-size: clamp(13px, 2.8vw, 16px);
+            color: #f48fb1;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .success-container {
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            max-width: 550px;
+            width: 100%;
+        }
+
+        .big-heart {
+            font-size: clamp(70px, 13vw, 120px);
+            margin-bottom: clamp(18px, 3.5vw, 30px);
+            animation: heartBeatBig 1s infinite;
+            filter: drop-shadow(0 8px 25px rgba(255, 105, 180, 0.5));
+        }
+
+        .success-title {
+            font-size: clamp(36px, 8vw, 56px);
+            background: linear-gradient(135deg, #d81b60, #ff1744);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: clamp(18px, 3.5vw, 30px);
+            font-weight: 900;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .thank-you {
+            font-size: clamp(26px, 5.5vw, 38px);
+            background: linear-gradient(135deg, #ff1744, #f50057);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: clamp(12px, 2.8vw, 22px);
+        }
+
+        .success-message {
+            font-size: clamp(16px, 3.8vw, 24px);
+            color: #ec407a;
+            font-weight: 500;
+            max-width: 450px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .heart-row {
+            margin-top: clamp(25px, 5vw, 45px);
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 1.8vw, 18px);
+            font-size: clamp(28px, 5.5vw, 42px);
+            flex-wrap: wrap;
+        }
+
+        .heart-row span {
+            animation: heartBeat 1s infinite;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: confetti 3s ease-out forwards;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(30px, -50px) rotate(-10deg);
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14% {
+                transform: scale(1.1);
+            }
+            28% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes heartBeatBig {
+            0%, 100% {
+                transform: scale(1) rotate(-3deg);
+            }
+            14% {
+                transform: scale(1.15) rotate(3deg);
+            }
+            28% {
+                transform: scale(1) rotate(-3deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Hearts (reduced) -->
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <!-- Question Container -->
+    <div id="questionContainer" class="container">
+        <div class="heart-top">💕</div>
+        
+        <h1>A Special Question...</h1>
+        
+        <p class="question">Would you be my Valentine? 💝</p>
+        
+        <div class="button-container">
+            <button class="btn-yes" onclick="handleYes()">Yes! 💖</button>
+            <button class="btn-no" id="noBtn" ontouchstart="moveNo()" onmouseover="moveNo()" onclick="moveNo()">No</button>
+        </div>
+        
+        <p class="hint">Choose wisely... 😉</p>
+    </div>
+
+    <!-- Success Container -->
+    <div id="successContainer" class="success-container hidden">
+        <div id="confettiContainer"></div>
+        
+        <div class="big-heart">💝</div>
+        
+        <h1 class="success-title">Yay! 🎉</h1>
+        
+        <p class="thank-you">Thank you, Sofia! 💕</p>
+        
+        <p class="success-message">
+            You've made this Valentine's Day truly special!
+            <br />
+            I can't wait to celebrate with you! 🌹✨
+        </p>
+        
+        <div class="heart-row">
+            <span style="animation-delay: 0s">💖</span>
+            <span style="animation-delay: 0.15s">💗</span>
+            <span style="animation-delay: 0.3s">💕</span>
+            <span style="animation-delay: 0.45s">💝</span>
+            <span style="animation-delay: 0.6s">💓</span>
+        </div>
+    </div>
+
+    <script>
+        // Create background hearts (reduced to 8 for performance)
+        const bgHearts = document.getElementById('bgHearts');
+        const heartEmojis = ['❤️', '💕', '💖', '💗'];
+        for (let i = 0; i < 8; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartEmojis[i % 4];
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${Math.random() * 100}%`;
+            heart.style.animationDelay = `${i * 2.5}s`;
+            bgHearts.appendChild(heart);
+        }
+
+        // No button interaction
+        let noClicks = 0;
+        const noTexts = ["No", "Sure? 🥺", "Really? 💕", "Think! 🌹", "Please? 💝", "Last! 😊"];
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            noClicks++;
+            btn.textContent = noTexts[Math.min(noClicks, 5)];
+            
+            if (window.innerWidth >= 500) {
+                const x = (Math.random() - 0.5) * 300;
+                const y = (Math.random() - 0.5) * 200;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        }
+
+        // Yes button
+        function handleYes() {
+            document.getElementById('questionContainer').classList.add('hidden');
+            document.getElementById('successContainer').classList.remove('hidden');
+            
+            // Create confetti (reduced to 30)
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#ff1744', '#f50057', '#ff6b9d', '#ffa6c1'];
+            
+            for (let i = 0; i < 30; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = `${Math.random() * 100}%`;
+                c.style.background = colors[i % 4];
+                c.style.animationDelay = `${Math.random()}s`;
+                container.appendChild(c);
+            }
+
+            // Vibration
+            if ('vibrate' in navigator) {
+                navigator.vibrate([100, 50, 100]);
+            }
+        }
+    </script>
+</body>
+</html>
